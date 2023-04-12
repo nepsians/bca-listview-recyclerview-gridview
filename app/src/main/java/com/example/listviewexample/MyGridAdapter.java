@@ -1,6 +1,7 @@
 package com.example.listviewexample;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class MyListAdapter extends ArrayAdapter<String> {
+public class MyGridAdapter extends ArrayAdapter<String> {
     Activity context;
-    String[] title;
-    String[] description;
+    String[] names;
+    String[] emails;
 
-    public MyListAdapter(Activity context, String[] title, String[] description) {
-        super(context, R.layout.custom_list, title);
+    public MyGridAdapter(@NonNull Activity context, String[] names, String[] emails) {
+        super(context, R.layout.custom_list, names);
+
         this.context = context;
-        this.title = title;
-        this.description = description;
+        this.names = names;
+        this.emails = emails;
     }
 
     @NonNull
@@ -28,10 +30,11 @@ public class MyListAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.custom_list, null, true);
 
-        TextView titleTextView = rowView.findViewById(R.id.nameTv);
-        TextView descTextView = rowView.findViewById(R.id.emailTv);
-        titleTextView.setText(title[position]);
-        descTextView.setText(description[position]);
+        TextView nameTextView = rowView.findViewById(R.id.nameTv);
+        TextView emailTextView = rowView.findViewById(R.id.emailTv);
+
+        nameTextView.setText(names[position]);
+        emailTextView.setText(emails[position]);
 
         return rowView;
     }
