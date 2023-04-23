@@ -9,44 +9,50 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Activity activity;
-    String[] names;
-    String[] emails;
+    ArrayList<MyDataModel> tasks;
 
-    public RecyclerViewAdapter(Activity activity, String[] names, String[] emails) {
+    public RecyclerViewAdapter(Activity activity, ArrayList<MyDataModel> tasks) {
         this.activity = activity;
-        this.names = names;
-        this.emails = emails;
+        this.tasks = tasks;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
-        View listItem = layoutInflater.inflate(R.layout.custom_list, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.custom_list_task, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.nameTv.setText(names[position]);
-        holder.emailTv.setText(emails[position]);
+        holder.taskTv.setText(tasks.get(position).getTitle());
+
+        holder.taskIdTv.setText(position + 1 + ". ");
     }
 
     @Override
     public int getItemCount() {
-        return names.length;
+        return tasks.size();
+    }
+
+    public void setTasks(ArrayList<MyDataModel> tasks) {
+        this.tasks = tasks;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTv, emailTv;
+        TextView taskIdTv, taskTv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTv = itemView.findViewById(R.id.nameTv);
-            emailTv = itemView.findViewById(R.id.emailTv);
+            taskTv = itemView.findViewById(R.id.taskTv);
+            taskIdTv = itemView.findViewById(R.id.taskIdTv);
         }
     }
 }

@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 public class ListViewActivity extends AppCompatActivity {
 
     @Override
@@ -23,11 +25,17 @@ public class ListViewActivity extends AppCompatActivity {
 //        String names[] = {"Ram", "Shyam", "Hari", "Sita", "Gita", "Rita"};
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.nameTextView, names);
 //        listView.setAdapter(adapter);
-
-        String title[] = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12"};
+        String title[] = {"Item 1", "Item 2", "Item 3", "Item 4"};
         String desc[] = {"This is description 1", "This is description 2", "This is description 3", "This is description 4", "This is description 5", "This is description 6", "This is description 7", "This is description 8", "This is description 9", "This is description 10", "This is description 11", "This is description 12"};
 
-        MyListAdapter myListAdapter = new MyListAdapter(this, title, desc);
+
+        ArrayList<MyDataModel> myDataModels = new ArrayList<MyDataModel>();
+        myDataModels.add(new MyDataModel("Item 1", "This is description 1"));
+        myDataModels.add(new MyDataModel("Item 2", "This is description 2"));
+        myDataModels.add(new MyDataModel("Item 3", "This is description 3"));
+        myDataModels.add(new MyDataModel("Item 4", "This is description 4"));
+
+        MyListAdapter myListAdapter = new MyListAdapter(this, title, myDataModels);
 
         listView.setAdapter(myListAdapter);
 

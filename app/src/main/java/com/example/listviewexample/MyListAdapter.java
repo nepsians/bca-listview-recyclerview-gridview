@@ -10,16 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class MyListAdapter extends ArrayAdapter<String> {
     Activity context;
-    String[] title;
-    String[] description;
+    ArrayList<MyDataModel> myDataModels;
 
-    public MyListAdapter(Activity context, String[] title, String[] description) {
+    public MyListAdapter(Activity context, String title[], ArrayList<MyDataModel> myDataModels) {
         super(context, R.layout.custom_list, title);
         this.context = context;
-        this.title = title;
-        this.description = description;
+        this.myDataModels = myDataModels;
     }
 
     @NonNull
@@ -30,8 +30,8 @@ public class MyListAdapter extends ArrayAdapter<String> {
 
         TextView titleTextView = rowView.findViewById(R.id.nameTv);
         TextView descTextView = rowView.findViewById(R.id.emailTv);
-        titleTextView.setText(title[position]);
-        descTextView.setText(description[position]);
+        titleTextView.setText(myDataModels.get(position).getTitle());
+        descTextView.setText(myDataModels.get(position).getDesc());
 
         return rowView;
     }
